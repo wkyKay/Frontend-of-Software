@@ -8,13 +8,15 @@ import SearchBox from "../components/search-box"
 import SearchButton from "../components/search-button"
 import axios from 'axios'
 import MyCourseList from "../components/course-item"
-import { Button } from "native-base"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import CommentPage from "./comment-page"
 import { useNavigation } from '@react-navigation/native';
+import { IconButton } from "native-base"
+import { Feather } from '@expo/vector-icons';
+import { View } from "native-base"
+import { Dimensions } from "react-native"
 
 const CommentSection = () => {
     
+    const { height } = Dimensions.get('window');
     interface CourseItem {
         id:string
         name: string
@@ -60,28 +62,36 @@ const CommentSection = () => {
         {setTeacher(teacher)
     },[])
 
+
     const renderCourseItem = ({ item }: { item: CourseItem }) => (
         <HStack>
-          <Box width={20} marginLeft={1} marginTop={1} bgColor={'blue.100'}> {item.name}</Box>
-          <Box width = {20}marginLeft={1} marginTop={1} bgColor={'blue.200'}> {item.course_id}</Box>
-          <Box width = {20} marginLeft={1} marginTop={1} bgColor={'blue.300'}> {item.class_name}</Box>
-          <Box width = {20} marginLeft={1} marginTop={1} bgColor={'blue.400'}> {item.teacher}</Box>
-          <Box width = {20} marginLeft={1} marginTop={1} bgColor={'blue.500'}> {item.time}</Box>
-          <Box width = {20} marginLeft={1} marginTop={1} bgColor={'blue.600'}> {item.college}</Box>
-          <Button width = {20} marginLeft={1} marginTop={1}
-          onPress={() => {
-            axios.get(
-                "http://10.32.48.213:5000/getCourseComments?course_id="+item.id
-              ).then(response => {
-                  setCommentData(response.data)
-              }).catch(error => {
-                console.log(error);
-              });
-              nav.navigate("CommentPage", {comment_data: comment_data}as CommentItem[])
-          }
-          }>
-            GO
-        </Button>
+          <Box width="60px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.name}</Box>
+          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'primary.300'}> {item.course_id}</Box>
+          <Box width = "52px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.teacher}</Box>
+          <Box width = "70px" marginLeft={1} marginTop={1} bgColor={'primary.300'}> {item.time}</Box>
+          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.college}</Box>
+          <IconButton
+                onPress={() => {
+                    axios.get(
+                        "http://10.25.4.137:5000/getCourseComments?course_id="+item.id
+                      ).then(response => {
+                          setCommentData(response.data)
+                      }).catch(error => {
+                        console.log(error);
+                      });
+                      nav.navigate("CommentPage", {comment_data: comment_data}as CommentItem[])
+                  }
+                }
+                borderRadius={100}
+                borderColor={'blue.300'}
+                bgColor={'blue'}
+                _icon={{
+                  as: Feather,
+                  name: 'search',
+                  size: 6,
+                  color: 'black'
+                }}
+                />
         </HStack>
         
       );
@@ -101,7 +111,7 @@ const CommentSection = () => {
         w="full">
             <Masthead
                 title="Comment Section"
-                image={require('../assets/forComment.jpg')}
+                image={require('../assets/forComment3.jpg')}
             >
                 <NavBar />
                 <VStack>
@@ -109,23 +119,26 @@ const CommentSection = () => {
                     <SearchBox 
                     input_text={college} 
                     place_holder="college"
-                    onChangeSubject={handleChangeCollege}/>
+                    onChangeSubject={handleChangeCollege}
+                    width="110"/>
                     <SearchBox 
                     input_text={course} 
                     place_holder="course"
-                    onChangeSubject={handleChangeCourse}/>
+                    onChangeSubject={handleChangeCourse}
+                    width="110"/>
                     <SearchBox 
                     input_text={teacher} 
                     place_holder="teacher"
-                    onChangeSubject={handleChangeTeacher}/>
+                    onChangeSubject={handleChangeTeacher}
+                    width="110"/>
                     
                 </HStack>
                 <SearchButton
                      active={true}
-                     icon = "question"
+                     icon={null}
                      onPress={() => {
                         axios.get(
-                            "http://10.32.48.213:5000/getCourseList?"+send_text
+                            "http://10.25.4.137:5000/getCourseList?"+send_text
                           ).then(response => {
                             setCourseData(response.data)
                           }).catch(error => {
@@ -146,8 +159,10 @@ const CommentSection = () => {
                 borderTopRightRadius="20px"
                 pt="20px"
             >
+                <View style={{ height }}>
                 <MyCourseList data={course_data} renderItem={renderCourseItem}></MyCourseList>
-                
+                <Text></Text>
+                </View>
             </VStack>
         </AnimatedColorBox>
     )

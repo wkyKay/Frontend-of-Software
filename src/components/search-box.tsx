@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { Center, VStack } from 'native-base';
 import {
-  Pressable,
-  useColorModeValue,
-  Icon,
-  Fab,
   Input, Box, HStack
 } from 'native-base'
 import MenuButton from "./menu-button";
@@ -21,6 +16,7 @@ interface Props extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'>{
   input_text:string;
   place_holder: string;
   onChangeSubject?: (subject: string) => void
+  width: string;
 }
 
 
@@ -28,7 +24,8 @@ const SearchBox = (props: Props) => {
   const{
     input_text,
     place_holder,
-    onChangeSubject
+    onChangeSubject,
+    width
   } = props
 
 
@@ -38,19 +35,6 @@ const SearchBox = (props: Props) => {
     },
     [onChangeSubject]
   )
-
-
-  // function to fetch data from backend
-  const fetchData = () => {
-    try {
-        const response =axios.get(
-          `http://10.26.141.251:5000/getCourseList?name=wky2&age=212`
-        );
-    
-    } catch (error) {
-        console.error(error);
-    }
-  }
 
 
   return (
@@ -64,7 +48,7 @@ const SearchBox = (props: Props) => {
       borderBottomRightRadius="20px">
       <Input 
        type="text" 
-       width={110} 
+       width={width}
        borderTopLeftRadius="20px"
        borderTopRightRadius="20px"
        borderBottomLeftRadius="20px"
@@ -77,18 +61,6 @@ const SearchBox = (props: Props) => {
        >
        </Input>
        </Box>
-      
-      {/* <MenuButton
-        active
-        onPress={() => {
-          const response = axios.get(
-            send_link + "?" +place_holder + "=" + input_text + "&"
-            );
-        }}
-        icon="question"
-      >
-        {subject}
-      </MenuButton> */}
     </HStack>
   );
 };

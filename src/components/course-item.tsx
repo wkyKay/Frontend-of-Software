@@ -32,6 +32,7 @@ const MyCourseList = ({ data, renderItem}: Props) => {
       data={data}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
+      contentContainerStyle={{ flexGrow: 1 }} 
     />
   );
 };
