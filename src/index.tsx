@@ -5,8 +5,8 @@ import AboutScreen from './screens/about-screen'
 import Sidebar from './components/sidebar'
 import CommentSection from './screens/comment-section'
 const Drawer = createDrawerNavigator()
-import { NavigationContainer } from '@react-navigation/native'
 import CommentPage from './screens/comment-page'
+import EmailScreen from './screens/mail'
 
 const App = () => {
   return (
@@ -24,6 +24,7 @@ const App = () => {
         <Drawer.Screen name="About" component={AboutScreen} />
         <Drawer.Screen name='Comment' component={CommentSection}/>
         <Drawer.Screen name='CommentPage' component={CommentPage}/>
+        <Drawer.Screen name='Email' component={EmailScreen}/>
       </Drawer.Navigator>
   )
 }

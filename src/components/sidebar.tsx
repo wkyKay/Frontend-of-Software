@@ -30,6 +30,9 @@ const Sidebar = (props: DrawerContentComponentProps) => {
   const handlePressCommentSection = useCallback(() => {
     navigation.navigate('Comment')
   }, [navigation])
+  const handlePressEmailPage = useCallback(() => {
+    navigation.navigate('Email')
+  }, [navigation])
 
   return (
     <AnimatedColorBox
@@ -85,6 +88,15 @@ const Sidebar = (props: DrawerContentComponentProps) => {
         >
           Comment
         </MenuButton>
+
+        <MenuButton
+          active={currentRoute === 'Email'}
+          onPress={handlePressEmailPage}
+          icon="users"
+        >
+          Email
+        </MenuButton>
+
       </VStack>
       <Center>
         <ThemeToggle />

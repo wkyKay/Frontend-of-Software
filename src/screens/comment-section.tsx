@@ -11,12 +11,9 @@ import MyCourseList from "../components/course-item"
 import { useNavigation } from '@react-navigation/native';
 import { IconButton } from "native-base"
 import { Feather } from '@expo/vector-icons';
-import { View } from "native-base"
-import { Dimensions } from "react-native"
 
 const CommentSection = () => {
     
-    const { height } = Dimensions.get('window');
     interface CourseItem {
         id:string
         name: string
@@ -63,16 +60,6 @@ const CommentSection = () => {
     },[])
 
     const renderCourseItem = ({ item }: { item: CourseItem }) => (
-        // 50: '#EEF2F6',
-        // 100: '#CFD9E7',
-        // 200: '#B1C1D8',
-        // 300: '#92A9C9',
-        // 400: '#7491B9',
-        // 500: '#5578AA',
-        // 600: '#446088',
-        // 700: '#334866',
-        // 800: '#223044',
-        // 900: '#111822'
         <HStack>
           <Box width="60px" marginLeft={1} marginTop={1} bgColor={'#CFD9E7'}> {item.name}</Box>
           <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'#B1C1D8'}> {item.course_id}</Box>
