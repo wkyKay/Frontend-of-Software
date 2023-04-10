@@ -62,7 +62,6 @@ const CommentSection = () => {
         {setTeacher(teacher)
     },[])
 
-
     const renderCourseItem = ({ item }: { item: CourseItem }) => (
         <HStack>
           <Box width="60px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.name}</Box>
@@ -72,14 +71,7 @@ const CommentSection = () => {
           <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.college}</Box>
           <IconButton
                 onPress={() => {
-                    axios.get(
-                        "http://10.25.4.137:5000/getCourseComments?course_id="+item.id
-                      ).then(response => {
-                          setCommentData(response.data)
-                      }).catch(error => {
-                        console.log(error);
-                      });
-                      nav.navigate("CommentPage", {comment_data: comment_data}as CommentItem[])
+                    nav.navigate("CommentPage", {item: item}as CourseItem);
                   }
                 }
                 borderRadius={100}
@@ -159,10 +151,10 @@ const CommentSection = () => {
                 borderTopRightRadius="20px"
                 pt="20px"
             >
-                <View style={{ height }}>
+           
                 <MyCourseList data={course_data} renderItem={renderCourseItem}></MyCourseList>
-                <Text></Text>
-                </View>
+             
+            
             </VStack>
         </AnimatedColorBox>
     )

@@ -25,6 +25,7 @@ const MyCommentList = ({ data, renderCommentItem}: Props) => {
       renderItem={renderCommentItem}
       keyExtractor={(item) => item.id}
       contentContainerStyle={{ flexGrow: 1 }} 
+      scrollEnabled={true}
     />
   );
 };
