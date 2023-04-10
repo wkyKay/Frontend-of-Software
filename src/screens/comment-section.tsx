@@ -63,12 +63,22 @@ const CommentSection = () => {
     },[])
 
     const renderCourseItem = ({ item }: { item: CourseItem }) => (
+        // 50: '#EEF2F6',
+        // 100: '#CFD9E7',
+        // 200: '#B1C1D8',
+        // 300: '#92A9C9',
+        // 400: '#7491B9',
+        // 500: '#5578AA',
+        // 600: '#446088',
+        // 700: '#334866',
+        // 800: '#223044',
+        // 900: '#111822'
         <HStack>
-          <Box width="60px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.name}</Box>
-          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'primary.300'}> {item.course_id}</Box>
-          <Box width = "52px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.teacher}</Box>
-          <Box width = "70px" marginLeft={1} marginTop={1} bgColor={'primary.300'}> {item.time}</Box>
-          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'info.300'}> {item.college}</Box>
+          <Box width="60px" marginLeft={1} marginTop={1} bgColor={'#CFD9E7'}> {item.name}</Box>
+          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'#B1C1D8'}> {item.course_id}</Box>
+          <Box width = "52px" marginLeft={1} marginTop={1} bgColor={'#92A9C9'}> {item.teacher}</Box>
+          <Box width = "70px" marginLeft={1} marginTop={1} bgColor={'#7491B9'}> {item.time}</Box>
+          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={ '#5578AA'}> {item.college}</Box>
           <IconButton
                 onPress={() => {
                     nav.navigate("CommentPage", {item: item}as CourseItem);
@@ -130,7 +140,7 @@ const CommentSection = () => {
                      icon={null}
                      onPress={() => {
                         axios.get(
-                            "http://10.25.4.137:5000/getCourseList?"+send_text
+                            "http://10.25.3.167:5000/getCourseList?"+send_text
                           ).then(response => {
                             setCourseData(response.data)
                           }).catch(error => {

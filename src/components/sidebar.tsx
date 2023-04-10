@@ -71,17 +71,17 @@ const Sidebar = (props: DrawerContentComponentProps) => {
         >
           Tasks
         </MenuButton>
-        {/* <MenuButton
+        <MenuButton
           active={currentRoute === 'About'}
           onPress={handlePressMenuAbout}
           icon="info"
         >
-          About
-        </MenuButton> */}
+          Course Planning
+        </MenuButton>
         <MenuButton
           active={currentRoute === 'Comment'}
           onPress={handlePressCommentSection}
-          icon="trash"
+          icon="users"
         >
           Comment
         </MenuButton>

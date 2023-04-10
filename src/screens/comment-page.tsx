@@ -10,7 +10,6 @@ import { useState, useCallback } from 'react';
 import { TextArea } from 'native-base';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { useRef } from 'react';
 import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
 
 interface CommentItem {
@@ -54,7 +53,7 @@ const CommentPage = () => {
   const [comment_data, setCommentData] = useState<Props>();
   let item: CourseItem = route.params?.item as CourseItem
   useEffect(() => {
-    axios.get("http://10.25.4.137:5000/getCourseComments?course_id=" + item.id)
+    axios.get("http://10.25.3.167:5000/getCourseComments?course_id=" + item.id)
       .then(response => {
         setCommentData(response.data);
       })
@@ -136,7 +135,7 @@ const CommentPage = () => {
              
               formData.append("content", data)
 
-              axios.post('http://10.25.4.137:5000/postComment?course_id='+item.id, formData, {
+              axios.post('http://10.25.3.167:5000/postComment?course_id='+item.id, formData, {
                 headers: {
                   'Content-Type': 'multipart/form-data'
                 }
