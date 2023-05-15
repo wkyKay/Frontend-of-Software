@@ -4,16 +4,16 @@ interface CourseItem {
   id:string
   name: string
   course_id:string
-  class_name: string 
-  kind: string 
+  class_name: string
+  kind: string
   classes:string
   language: string
   score:string
   credit:string
-  period:string 
+  period:string
   teacher:string,
   time:string
-  capacity:string 
+  capacity:string
   star:string
   college:string
 }
@@ -32,7 +32,7 @@ const MyCourseList = ({ data, renderItem}: Props) => {
       data={data}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
-      contentContainerStyle={{ flexGrow: 1 }} 
+      // contentContainerStyle={{ flexGrow: 1 }}
       scrollEnabled={true}
       contentContainerStyle={{ paddingBottom: 300 }}
     />

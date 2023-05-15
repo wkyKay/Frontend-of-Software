@@ -4,34 +4,35 @@ import Masthead from "../components/masthead"
 import NavBar from "../components/navbar"
 import { useColorModeValue } from "native-base"
 import AnimatedColorBox from "../components/animated-color-box"
-import SearchBox from "../components/search-box"
+import InputBox from "../components/input-box"
 import SearchButton from "../components/search-button"
 import axios from 'axios'
 import MyCourseList from "../components/course-item"
 import { useNavigation } from '@react-navigation/native';
 import { IconButton } from "native-base"
 import { Feather } from '@expo/vector-icons';
+import {serverLink} from "../utils/ServerLink";
 
 const CommentSection = () => {
-    
+    const link_route = serverLink;
     interface CourseItem {
         id:string
         name: string
         course_id:string
-        class_name: string 
-        kind: string 
+        class_name: string
+        kind: string
         classes:string
         language: string
         score:string
         credit:string
-        period:string 
+        period:string
         teacher:string,
         time:string
-        capacity:string 
+        capacity:string
         star:string
         college:string
       }
-      
+
     interface CommentItem {
         id:string
         teacher_name:string
@@ -48,7 +49,6 @@ const CommentSection = () => {
     const [send_text, setSending] = useState("")
     const [course_data, setCourseData] = useState([])
     const [comment_data, setCommentData] = useState<CommentItem[]>([]);
-
     const handleChangeCollege = useCallback(college =>
         {setCollege(college)
     },[])
@@ -82,20 +82,21 @@ const CommentSection = () => {
                 }}
                 />
         </HStack>
-        
+
       );
 
 
     useEffect(() =>
         {
-            const newData = "id=12011129&college="+college+"&course="+course+"&teacher="+teacher
+            const newData = "id=1&college="+college+"&course="+course+"&teacher="+teacher
             setSending(newData)
     },[college, course, teacher])
     const nav = useNavigation()
     return (
-        
-        <AnimatedColorBox  
+
+        <AnimatedColorBox
         flex={1}
+
         bg={useColorModeValue('warmGray.50', 'primary.900')}
         w="full">
             <Masthead
@@ -105,42 +106,42 @@ const CommentSection = () => {
                 <NavBar />
                 <VStack>
                 <HStack>
-                    <SearchBox 
-                    input_text={college} 
+                    <InputBox
+                    input_text={college}
                     place_holder="college"
                     onChangeSubject={handleChangeCollege}
                     width="110"/>
-                    <SearchBox 
-                    input_text={course} 
+                    <InputBox
+                    input_text={course}
                     place_holder="course"
                     onChangeSubject={handleChangeCourse}
                     width="110"/>
-                    <SearchBox 
-                    input_text={teacher} 
+                    <InputBox
+                    input_text={teacher}
                     place_holder="teacher"
                     onChangeSubject={handleChangeTeacher}
                     width="110"/>
-                    
+
                 </HStack>
                 <SearchButton
                      active={true}
                      icon={null}
                      onPress={() => {
                         axios.get(
-                            "http://10.25.3.167:5000/getCourseList?"+send_text
+                            link_route + "/getCourseList?"+send_text
                           ).then(response => {
                             setCourseData(response.data)
                           }).catch(error => {
                             // 处理错误
                             console.log(error);
-                          });;
+                          });
                       }}
                     >
                         Search
                     </SearchButton>
                 </VStack>
             </Masthead>
-            
+
             <VStack
                 mt="-20px"
                 bg={useColorModeValue('warmGray.50', 'primary.900')}
@@ -148,10 +149,10 @@ const CommentSection = () => {
                 borderTopRightRadius="20px"
                 pt="20px"
             >
-           
+
                 <MyCourseList data={course_data} renderItem={renderCourseItem}></MyCourseList>
-             
-            
+
+
             </VStack>
         </AnimatedColorBox>
     )

@@ -20,7 +20,7 @@ interface Props extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'>{
 }
 
 
-const SearchBox = (props: Props) => {
+const InputBox = (props: Props) => {
   const{
     input_text,
     place_holder,
@@ -39,15 +39,15 @@ const SearchBox = (props: Props) => {
 
   return (
     <HStack>
-      <Box marginLeft={2} 
-      bg={"white"} 
+      <Box marginLeft={2}
+      bg={"white"}
       height="40px"
       borderTopLeftRadius="20px"
       borderTopRightRadius="20px"
       borderBottomLeftRadius="20px"
       borderBottomRightRadius="20px">
-      <Input 
-       type="text" 
+      <Input
+       type="text"
        width={width}
        borderTopLeftRadius="20px"
        borderTopRightRadius="20px"
@@ -65,4 +65,4 @@ const SearchBox = (props: Props) => {
   );
 };
 
-export default SearchBox;
+export default InputBox;

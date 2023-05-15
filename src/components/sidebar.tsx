@@ -34,6 +34,8 @@ const Sidebar = (props: DrawerContentComponentProps) => {
     navigation.navigate('Email')
   }, [navigation])
 
+
+
   return (
     <AnimatedColorBox
       safeArea
@@ -93,10 +95,9 @@ const Sidebar = (props: DrawerContentComponentProps) => {
           active={currentRoute === 'Email'}
           onPress={handlePressEmailPage}
           icon="users"
-        >
-          Email
-        </MenuButton>
-
+      >
+        Email
+      </MenuButton>
       </VStack>
       <Center>
         <ThemeToggle />

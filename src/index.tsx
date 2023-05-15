@@ -4,14 +4,16 @@ import MainScreen from './screens/main-screen'
 import AboutScreen from './screens/about-screen'
 import Sidebar from './components/sidebar'
 import CommentSection from './screens/comment-section'
+import LoginScreen from "./screens/login-screen";
 const Drawer = createDrawerNavigator()
 import CommentPage from './screens/comment-page'
 import EmailScreen from './screens/mail'
+import SignupScreen from "./screens/signup-screen";
 
 const App = () => {
   return (
     <Drawer.Navigator
-        initialRouteName="Main"
+        initialRouteName="Login"
         drawerContent={props => <Sidebar {...props} />}
         screenOptions={{
           //headershown可以控制上边界的显示
@@ -25,6 +27,8 @@ const App = () => {
         <Drawer.Screen name='Comment' component={CommentSection}/>
         <Drawer.Screen name='CommentPage' component={CommentPage}/>
         <Drawer.Screen name='Email' component={EmailScreen}/>
+        <Drawer.Screen name='Login' component={LoginScreen}/>
+        <Drawer.Screen name='Signup' component={SignupScreen}/>
       </Drawer.Navigator>
   )
 }

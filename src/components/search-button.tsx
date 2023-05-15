@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { Button, Icon, IButtonProps } from 'native-base'
 import { Feather } from '@expo/vector-icons'
 
-import SearchBox from './search-box';
+import InputBox from './input-box';
 
 interface Props extends IButtonProps {
   active: boolean
@@ -15,7 +15,7 @@ const SearchButton = (props: Props) => {
         icon,
         children,
     }=props
-    
+
 
   return (
     <Button
@@ -46,12 +46,12 @@ const SearchButton = (props: Props) => {
       justifyContent="flex-start"
       leftIcon={<Icon as={Feather} name={icon} size="sm" opacity={0.5} />}
       {...props}
-      
-     
+
+
     >
       {children}
     </Button>
-   
+
   )
 }
 
