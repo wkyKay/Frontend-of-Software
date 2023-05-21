@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { IconButton } from "native-base"
 import { Feather } from '@expo/vector-icons';
 import {serverLink} from "../utils/ServerLink";
+import {getShareId} from "../components/DataContext";
 
 const CommentSection = () => {
     const link_route = serverLink;
@@ -88,7 +89,7 @@ const CommentSection = () => {
 
     useEffect(() =>
         {
-            const newData = "id=1&college="+college+"&course="+course+"&teacher="+teacher
+            const newData = "id=" +getShareId() +"&college="+college+"&course="+course+"&teacher="+teacher
             setSending(newData)
     },[college, course, teacher])
     const nav = useNavigation()

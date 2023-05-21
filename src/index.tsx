@@ -9,6 +9,8 @@ const Drawer = createDrawerNavigator()
 import CommentPage from './screens/comment-page'
 import EmailScreen from './screens/mail'
 import SignupScreen from "./screens/signup-screen";
+import LoginWithEmailScreen from "./screens/login-email-screen";
+import SettingScreen from "./screens/setting-screen";
 
 const App = () => {
   return (
@@ -29,6 +31,9 @@ const App = () => {
         <Drawer.Screen name='Email' component={EmailScreen}/>
         <Drawer.Screen name='Login' component={LoginScreen}/>
         <Drawer.Screen name='Signup' component={SignupScreen}/>
+        <Drawer.Screen name='LoginWithEmail' component={LoginWithEmailScreen}/>
+        <Drawer.Screen name='Setting' component={SettingScreen}/>
+
       </Drawer.Navigator>
   )
 }

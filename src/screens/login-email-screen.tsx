@@ -1,6 +1,6 @@
 import AnimatedColorBox from "../components/animated-color-box";
 import {Box, Button, Heading, HStack, IconButton, Image, Input, useColorModeValue, VStack} from "native-base";
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {NativeSyntheticEvent, TextInputChangeEventData} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import InputBox from "../components/input-box";
@@ -9,40 +9,35 @@ import {serverLink} from "../utils/ServerLink";
 import axios from "axios";
 import {View, ScrollView, StyleSheet} from 'react-native';
 import {
-    setSharedId,
-    setSharedName,
-    setSharedEmail,
-    setSharedGender,
+    setSharedEmail, setSharedEmailPassword,
+    setSharedGender, setSharedId,
     setSharedMajor,
-    setSharedUsername,
-    getShareId, setSharedPassword, setSharedEmailPassword
+    setSharedName,
+    setSharedUsername
 } from "../components/DataContext";
 
-const LoginScreen = () => {
+const LoginWithEmailScreen = () => {
     const link_route = serverLink;
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [VerifyCode, setVerifyCode] = useState("");
 
-    const handleChangeName = useCallback(name => {
-        setName(name)
+    const handleChangeEmail = useCallback(email => {
+        setEmail(email)
     }, [])
-    const handleChangePassword = useCallback(password => {
-        setPassword(password)
+    const handleChangeVerifyCode = useCallback(VerifyCode => {
+        setVerifyCode(VerifyCode)
     }, [])
-    const handleChangePasswordSubject = useCallback(
+    const handleChangeVerifyCodeSubject = useCallback(
         (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-            handleChangePassword && handleChangePassword(e.nativeEvent.text)
+            handleChangeVerifyCode && handleChangeVerifyCode(e.nativeEvent.text)
         },
-        [handleChangePassword]
+        [handleChangeVerifyCode]
     )
     const formData = new FormData();
     const nav = useNavigation();
     const [warning, setWarning] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+
     const styles = StyleSheet.create({
         container: {
             flex: 1,
@@ -52,7 +47,6 @@ const LoginScreen = () => {
             paddingBottom: 500, // 设置底部填充
         },
     });
-
     useEffect(() => {
         setWarning(warning)
     }, [warning]);
@@ -61,7 +55,6 @@ const LoginScreen = () => {
     return (
         <ScrollView>
             <View style={styles.contentContainer}>
-
                 <Box
                     flex={1}
                     w="full"
@@ -80,56 +73,68 @@ const LoginScreen = () => {
                         />
                         <Box flex={1}/>
                         <Heading color="white" p={6} size="xl">
-                            {"Welcom to the app"}
+                            {"Login with Email"}
                         </Heading>
                     </VStack>
                     <HStack>
                         <VStack w="full" h="110px" alignItems="center" alignContent="center" p={4}>
                             <Box bg={"orange.300"} marginBottom={2} alignItems={"center"}>{warning}</Box>
                             <InputBox
-                                input_text={name}
-                                place_holder="id"
-                                onChangeSubject={handleChangeName}
-                                width="200"/>
+                                input_text={email}
+                                place_holder="邮箱地址"
+                                onChangeSubject={handleChangeEmail}
+                                width="250"/>
                             <Box marginLeft={2}
                                  marginTop={5}
-                                 bg={"white"}
                                  height="40px"
                                  borderTopLeftRadius="20px"
                                  borderTopRightRadius="20px"
                                  borderBottomLeftRadius="20px"
                                  borderBottomRightRadius="20px">
-                                <Input
-                                    type={showPassword ? 'text' : 'password'}
-                                    width="200"
-                                    borderTopLeftRadius="20px"
-                                    borderTopRightRadius="20px"
-                                    borderBottomLeftRadius="20px"
-                                    borderBottomRightRadius="20px"
-                                    height="40px"
-                                    fontSize={17}
-                                    placeholder="Password"
-                                    onChange={handleChangePasswordSubject}
-                                    value={password}
-                                />
+                                <HStack>
+                                    <Input
+                                        bgColor={"white"}
+                                        type="text"
+                                        width="150"
+                                        borderTopLeftRadius="20px"
+                                        borderTopRightRadius="20px"
+                                        borderBottomLeftRadius="20px"
+                                        borderBottomRightRadius="20px"
+                                        height="40px"
+                                        fontSize={17}
+                                        placeholder="验证码"
+                                        onChange={handleChangeVerifyCodeSubject}
+                                        value={VerifyCode}
+                                    />
+                                    <Button marginLeft={5}
+                                            width={70}
+                                            bgColor={"green.500"}
+                                            onPress={() => {
+                                                const formData1 = new FormData();
+                                                formData1.append('email_address', email);
+                                                axios.post(link_route + '/login_by_email', formData1, {
+                                                    headers: {
+                                                        'Content-Type': 'multipart/form-data'
+                                                    }
+                                                }).then(response => {
+                                                    setWarning(response.data['state'])
+                                                }).catch(error => {
+                                                    console.error('Login failed:', error);
+                                                })
+                                            }}
+                                    >获取
+                                    </Button>
+                                </HStack>
                             </Box>
-                            <IconButton
-                                onPress={togglePasswordVisibility}
-                                borderRadius={50}
-                                _icon={{
-                                    as: Feather,
-                                    name: 'eye',
-                                    size: 6,
-                                    color: 'gray'
-                                }}
-                            />
-                            <HStack marginTop={2}>
+
+                            <HStack>
                                 <Button marginLeft={5}
+                                        marginTop={5}
                                         width={100}
                                         onPress={() => {
-                                            formData.append("id", name);
-                                            formData.append("password", password);
-                                            axios.post(link_route + '/login', formData, {
+                                            formData.append("email_address", email);
+                                            formData.append("verify_code", VerifyCode);
+                                            axios.post(link_route + '/login_by_verify_code', formData, {
                                                 headers: {
                                                     'Content-Type': 'multipart/form-data'
                                                 }
@@ -141,7 +146,6 @@ const LoginScreen = () => {
                                                     setSharedGender(response.data['gender']);
                                                     setSharedMajor(response.data['major']);
                                                     setSharedEmail(response.data['email'])
-                                                    setSharedPassword(response.data['password'])
                                                     setSharedId(response.data['id'].toString())
                                                     setSharedEmailPassword(response.data['email_password'])
                                                     nav.navigate("Main")
@@ -154,24 +158,12 @@ const LoginScreen = () => {
                                 >
                                     LogIn
                                 </Button>
-                                <Button marginLeft={10}
-                                        width={100}
+                                <Button marginLeft={5} marginTop={5} height={10} width={100}
                                         onPress={() => {
-                                            nav.navigate("Signup");
-                                        }}>
-                                    Register
-                                </Button>
-
+                                            nav.navigate("Login")
+                                        }}
+                                >Back</Button>
                             </HStack>
-                            <Button marginTop={5}
-                                    height={10}
-                                    marginLeft={10}
-                                    bgColor={"green.500"}
-                                    onPress={() => {
-                                        nav.navigate("LoginWithEmail");
-                                    }}>
-                                Login with email
-                            </Button>
                         </VStack>
 
                     </HStack>
@@ -183,4 +175,4 @@ const LoginScreen = () => {
 
 }
 
-export default LoginScreen;
+export default LoginWithEmailScreen;

@@ -12,6 +12,7 @@ import {useEffect} from 'react';
 import axios from 'axios';
 import {NativeSyntheticEvent, TextInputChangeEventData} from 'react-native'
 import {serverLink} from "../utils/ServerLink";
+import {getShareId} from "../components/DataContext";
 
 interface CommentItem {
     id: string
@@ -62,7 +63,7 @@ const CommentPage = () => {
     }, [item.id]);
 
     const formData = new FormData();
-    formData.append('student_id', '1');
+    formData.append('student_id', getShareId());
     formData.append('course_id', item.id)
     formData.append("reply_to", "")
 

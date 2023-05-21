@@ -8,9 +8,19 @@ import InputBox from "../components/input-box";
 import {Text} from "native-base";
 import axios from "axios";
 import {serverLink} from "../utils/ServerLink";
+import { View, ScrollView, StyleSheet } from 'react-native';
 import Masthead from "../components/masthead";
 
 const SignupScreen = () => {
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            padding: 20,
+        },
+        contentContainer: {
+            paddingBottom: 800, // 设置底部填充
+        },
+    });
     const link_route = serverLink;
     const [id, setId] = useState("");
     const [username, setUsername] = useState("");//昵称
@@ -57,13 +67,13 @@ const SignupScreen = () => {
     }, [warning]);
 
     return (
-        <Box
-            flex={1}
-            w="full"
-            bgColor={"green.50"}
-        >
-            <VStack w="full" h="110px" marginTop={200} alignItems="center" alignContent="center" p={4}>
+        <ScrollView>
+            <View style={styles.contentContainer}>
+
+
+            <VStack w="full" h="110px" marginTop={20} alignItems="center" alignContent="center" p={4}>
                 <Box bg={"orange.300"} marginBottom={2} alignItems={"center"}>{warning}</Box>
+
                 <HStack>
                     <Text fontSize={18}>学号:</Text>
                     <InputBox input_text={id} place_holder={"id"} onChangeSubject={handleChangeId} width="200"/>
@@ -77,7 +87,8 @@ const SignupScreen = () => {
 
                 <HStack marginTop={5}>
                     <Text fontSize={18}>昵称:</Text>
-                    <InputBox input_text={name} place_holder={"name"} onChangeSubject={handleChangeName} width="200"/>
+                    <InputBox input_text={name} place_holder={"name"} onChangeSubject={handleChangeName}
+                              width="200"/>
                 </HStack>
 
                 <HStack marginTop={5}>
@@ -144,8 +155,8 @@ const SignupScreen = () => {
                     >Back</Button>
                 </HStack>
             </VStack>
-
-        </Box>
+            </View>
+        </ScrollView>
     )
 
 }
