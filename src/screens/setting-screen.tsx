@@ -16,7 +16,13 @@ import {
     getSharedMajor,
     getShareId,
     getShareUsername,
-    getSharedPassword, getSharedEmailPassword
+    getSharedPassword,
+    getSharedEmailPassword,
+    setSharedId,
+    setSharedName,
+    setSharedMajor,
+    setSharedUsername,
+    setSharedGender
 } from "../components/DataContext";
 import NavBar from "../components/navbar";
 
@@ -34,7 +40,7 @@ const SettingScreen = () => {
     const [id, setId] = useState(getShareId());
     const [username, setUsername] = useState(getShareUsername());//昵称
     const [name, setName] = useState(getSharedName());//真实姓名
-    const [password, setPassword] = useState(getSharedPassword());
+    const [password, setPassword] = useState("");
     //gender should be checkbox
     const [gender, setGender] = useState(getSharedGender());
     const [major, setMajor] = useState(getSharedMajor());
@@ -79,7 +85,7 @@ const SettingScreen = () => {
         <ScrollView>
             <View style={styles.contentContainer}>
                 <Box
-                 >
+                >
 
                     <VStack h="300px" pb={5}>
                         <Image
@@ -93,7 +99,7 @@ const SettingScreen = () => {
                             source={require('../assets/login.jpg')}
                             alt="masthead image"
                         />
-                        <NavBar />
+                        <NavBar/>
 
                         <Heading color="white" p={6} size="xl">
                             {"Modify your Information"}
@@ -121,14 +127,6 @@ const SettingScreen = () => {
                             <InputBox input_text={name} place_holder={"name"} onChangeSubject={handleChangeName}
                                       width="200"/>
                         </HStack>
-
-                        <HStack marginTop={5}>
-                            <Text fontSize={18}>密码:</Text>
-                            <InputBox input_text={password} place_holder={"password"}
-                                      onChangeSubject={handleChangePassword}
-                                      width="200"/>
-                        </HStack>
-
                         <HStack marginTop={5}>
                             <Text fontSize={18}>性别:</Text>
                             <InputBox input_text={gender} place_holder={"gender"} onChangeSubject={handleChangeGender}
@@ -149,9 +147,44 @@ const SettingScreen = () => {
 
                         <HStack marginTop={5}>
                             <Text fontSize={18}>邮箱密码:</Text>
-                            <InputBox input_text={email_password} place_holder={"email_password"}
-                                      onChangeSubject={handleChangeEmailPassword} width="200"/>
+                            {/*<InputBox input_text={email_password} place_holder={"email_password"}*/}
+                            {/*          onChangeSubject={handleChangeEmailPassword} width="200"/>*/}
+                            <Box marginLeft={2}
+                                 bg={"white"}
+                                 height="40px"
+                                 borderTopLeftRadius="20px"
+                                 borderTopRightRadius="20px"
+                                 borderBottomLeftRadius="20px"
+                                 borderBottomRightRadius="20px">
+                                <Input
+                                    type="password"
+                                    width="200"
+                                    borderTopLeftRadius="20px"
+                                    borderTopRightRadius="20px"
+                                    borderBottomLeftRadius="20px"
+                                    borderBottomRightRadius="20px"
+                                    height="40px"
+                                    fontSize={17}
+                                    placeholder={"email_password"}
+                                    onChange={handleChangeEmailPassword}
+                                    value={email_password}
+                                >
+                                </Input>
+                            </Box>
                         </HStack>
+                        <VStack>
+                            <Box bgColor={"green.300"}
+                                 alignItems={"center"} marginBottom={2} marginTop={2} width={180}
+                                 alignContent="center">
+                                Confirm with Password:
+                            </Box>
+                            <HStack>
+                                <Text fontSize={18}>密码:</Text>
+                                <InputBox input_text={password} place_holder={"password"}
+                                          onChangeSubject={handleChangePassword}
+                                          width="200"/>
+                            </HStack>
+                        </VStack>
                         <HStack>
                             <Button width={100} marginTop={5} onPress={() => {
                                 formData.append("id", id)
@@ -170,6 +203,15 @@ const SettingScreen = () => {
                                 }).then(response => {
                                     temp = response.data['state']
                                     setWarning(response.data['state'])
+                                    if (response.data['state'] === 'succeed') {
+                                        setSharedId(id);
+                                        setSharedName(name);
+                                        setSharedMajor(major);
+                                        setEmailPassword(email_password);
+                                        setEmail(email);
+                                        setSharedUsername(username);
+                                        setSharedGender(gender);
+                                    }
                                 }).catch(error => {
                                     console.error('Login failed:', error);
                                 })

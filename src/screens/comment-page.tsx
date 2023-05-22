@@ -53,7 +53,7 @@ const CommentPage = () => {
     const [comment_data, setCommentData] = useState<Props>();
     let item: CourseItem = route.params?.item as CourseItem
     useEffect(() => {
-        axios.get(link_route+"/getCourseComments?course_id=" + item.id)
+        axios.get(link_route + "/getCourseComments?course_id=" + item.id)
             .then(response => {
                 setCommentData(response.data);
             })
@@ -83,14 +83,19 @@ const CommentPage = () => {
     const renderCommentItem = ({item}: { item: CommentItem }) => (
         <VStack>
             <HStack>
-                <Button textAlign={'left'} width="80px" marginLeft="5px" marginTop={1} bgColor={'blueGray.500'}
+                <Button width="100px" marginLeft="5px" marginTop={1} bgColor={'blueGray.500'}
                         height="45px"> {item.student_id}</Button>
-                <Box width="80px" marginLeft="5px" marginTop={1} bgColor={'blueGray.400'}> {item.student_name}</Box>
-                <Box width="90px" marginLeft="5px" marginTop={1} bgColor={'blueGray.400'}> {item.teacher_name}</Box>
-                <Box width="85px" marginLeft="5px" marginTop={1} bgColor={'blueGray.400'}> {item.reply_student}</Box>
+                <Box width="120px" marginLeft="5px" marginTop={1} bgColor={'blueGray.400'}
+                     alignItems="center" alignContent="center" borderTopRightRadius={5} borderTopLeftRadius={5}
+                     borderBottomLeftRadius={5} borderBottomRightRadius={5}
+                > {item.student_name}</Box>
+                <Box width="120px" marginLeft="5px" marginTop={1} bgColor={'blueGray.400'} borderTopRightRadius={5}
+                     borderTopLeftRadius={5} borderBottomLeftRadius={5} borderBottomRightRadius={5}
+                     alignItems="center" alignContent="center"> {item.teacher_name}</Box>
             </HStack>
             <Box height="100px" marginLeft={1} marginTop={1} bgColor={'blueGray.300'} width="350px"
-                 marginBottom="15px"> {item.content}</Box>
+                 marginBottom="15px" borderTopRightRadius={10} borderTopLeftRadius={10} borderBottomLeftRadius={10}
+                 borderBottomRightRadius={10}> {item.content}</Box>
         </VStack>
 
     );
@@ -100,8 +105,23 @@ const CommentPage = () => {
             flex={1}
             bg={useColorModeValue('warmGray.50', 'primary.900')}
             w="full">
+            {/*id: string*/}
+            {/*name: string*/}
+            {/*course_id: string*/}
+            {/*class_name: string*/}
+            {/*kind: string*/}
+            {/*classes: string*/}
+            {/*language: string*/}
+            {/*score: string*/}
+            {/*credit: string*/}
+            {/*period: string*/}
+            {/*teacher: string,*/}
+            {/*time: string*/}
+            {/*capacity: string*/}
+            {/*star: string*/}
+            {/*college: string*/}
             <Masthead
-                title="评论区"
+                title={item.class_name.toString() +"\n" + item.teacher.toString()}
                 image={require('../assets/forComment2.jpg')}
             >
                 <HStack w="full" h="110px" alignItems="center" alignContent="center" p={4}>

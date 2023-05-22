@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from "react"
-import { Box, HStack, Text, VStack } from 'native-base'
+import {Box, Button, HStack, Text, VStack} from 'native-base'
 import Masthead from "../components/masthead"
 import NavBar from "../components/navbar"
 import { useColorModeValue } from "native-base"
@@ -13,6 +13,7 @@ import { IconButton } from "native-base"
 import { Feather } from '@expo/vector-icons';
 import {serverLink} from "../utils/ServerLink";
 import {getShareId} from "../components/DataContext";
+import searchButton from "../components/search-button";
 
 const CommentSection = () => {
     const link_route = serverLink;
@@ -126,7 +127,7 @@ const CommentSection = () => {
                 </HStack>
                 <SearchButton
                      active={true}
-                     icon={null}
+                     icon={"search"}
                      onPress={() => {
                         axios.get(
                             link_route + "/getCourseList?"+send_text
