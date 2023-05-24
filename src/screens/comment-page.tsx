@@ -83,13 +83,13 @@ const CommentPage = () => {
     const renderCommentItem = ({item}: { item: CommentItem }) => (
         <VStack>
             <HStack>
-                <Button width="100px" marginLeft="5px" marginTop={1} bgColor={'blueGray.500'}
+                <Button width="100px" marginLeft="5px" bgColor={'blueGray.500'}
                         height="45px"> {item.student_id}</Button>
-                <Box width="120px" marginLeft="5px" marginTop={1} bgColor={'blueGray.400'}
+                <Box width="120px" marginLeft="5px" bgColor={'blueGray.400'}
                      alignItems="center" alignContent="center" borderTopRightRadius={5} borderTopLeftRadius={5}
                      borderBottomLeftRadius={5} borderBottomRightRadius={5}
                 > {item.student_name}</Box>
-                <Box width="120px" marginLeft="5px" marginTop={1} bgColor={'blueGray.400'} borderTopRightRadius={5}
+                <Box width="120px" marginLeft="5px" bgColor={'blueGray.400'} borderTopRightRadius={5}
                      borderTopLeftRadius={5} borderBottomLeftRadius={5} borderBottomRightRadius={5}
                      alignItems="center" alignContent="center"> {item.teacher_name}</Box>
             </HStack>
@@ -121,7 +121,7 @@ const CommentPage = () => {
             {/*star: string*/}
             {/*college: string*/}
             <Masthead
-                title={item.class_name.toString() +"\n" + item.teacher.toString()}
+                title={item.class_name.toString() + "\n" + item.teacher.toString()}
                 image={require('../assets/forComment2.jpg')}
             >
                 <HStack w="full" h="110px" alignItems="center" alignContent="center" p={4}>
@@ -154,20 +154,23 @@ const CommentPage = () => {
                     </HStack>
                     <IconButton
                         onPress={() => {
+                            if(data != "") {
 
-                            formData.append("content", data)
+                                formData.append("content", data)
 
-                            axios.post(link_route + '/postComment?course_id=' + item.id, formData, {
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                }
-                            }).then(response => {
-                                setCommentData(response.data);
-                                setData("");
-                                // console.log('Login succeeded:');
-                            }).catch(error => {
-                                console.error('Login failed:', error);
-                            })
+                                axios.post(link_route + '/postComment?course_id=' + item.id, formData, {
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data'
+                                    }
+                                }).then(response => {
+                                    setCommentData(response.data);
+                                    setData("");
+                                    // console.log('Login succeeded:');
+                                }).catch(error => {
+                                    console.error('Login failed:', error);
+                                })
+                            }
+
                         }}
                         borderRadius={100}
                         borderColor={'blue.300'}
@@ -188,6 +191,19 @@ const CommentPage = () => {
                 borderTopRightRadius="20px"
                 pt="20px"
             >
+                <HStack >
+                    <Box width="102px" marginLeft="5px" bgColor={'blue.300'}
+                         alignItems="center" alignContent="center" borderTopRightRadius={5} borderTopLeftRadius={5}
+                         borderBottomLeftRadius={5} borderBottomRightRadius={5}
+                         height="20px"> id:</Box>
+                    <Box width="125px" bgColor={'blue.400'}
+                         alignItems="center" alignContent="center" borderTopRightRadius={5} borderTopLeftRadius={5}
+                         borderBottomLeftRadius={5} borderBottomRightRadius={5}  height="20px"
+                    > name: </Box>
+                    <Box width="122px" bgColor={'blue.300'} borderTopRightRadius={5}
+                         borderTopLeftRadius={5} borderBottomLeftRadius={5} borderBottomRightRadius={5}
+                         alignItems="center" alignContent="center"  height="20px"> teacher: </Box>
+                </HStack>
                 <MyCommentList data={comment_data} renderCommentItem={renderCommentItem}></MyCommentList>
             </VStack>
         </AnimatedColorBox>

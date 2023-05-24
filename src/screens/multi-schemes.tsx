@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 8,
     borderWidth: 1,
     borderColor: '#000',
-    height:120,
+    height:220,
   },
   tableCellText: {
     fontSize: 16,
@@ -128,65 +128,65 @@ const MultiSchemes = ({ route }) => {
         const times = item.time.split(' ');
         times.forEach(element => {
           if(element === '星期一第1-2节'){
-            newArray.set([1,1],item.class_name);
+            newArray.set([1,1],item.class_name+item.teacher);
           }else if(element === '星期一第3-4节'){
-            newArray.set([2,1],item.class_name);
+            newArray.set([2,1],item.class_name+item.teacher);
           }else if(element === '星期一第5-6节'){
-            newArray.set([3,1],item.class_name);
+            newArray.set([3,1],item.class_name+item.teacher);
           }else if(element === '星期一第7-8节'){
-            newArray.set([4,1],item.class_name);
+            newArray.set([4,1],item.class_name+item.teacher);
           }else if(element === '星期一第9-10节'){
-            newArray.set([5,1],item.class_name);
+            newArray.set([5,1],item.class_name+item.teacher);
           }else if(element === '星期一第11节'){
-            newArray.set([6,1],item.class_name);
+            newArray.set([6,1],item.class_name+item.teacher);
           }else if(element === '星期二第1-2节'){
-            newArray.set([1,2],item.class_name);
+            newArray.set([1,2],item.class_name+item.teacher);
           }else if(element === '星期二第3-4节'){
-            newArray.set([2,2],item.class_name);
+            newArray.set([2,2],item.class_name+item.teacher);
           }else if(element === '星期二第5-6节'){
-            newArray.set([3,2],item.class_name);
+            newArray.set([3,2],item.class_name+item.teacher);
           }else if(element === '星期二第7-8节'){
-            newArray.set([4,2],item.class_name);
+            newArray.set([4,2],item.class_name+item.teacher);
           }else if(element === '星期二第9-10节'){
-            newArray.set([5,2],item.class_name);
+            newArray.set([5,2],item.class_name+item.teacher);
           }else if(element === '星期二第11节'){
-            newArray.set([6,2],item.class_name);
+            newArray.set([6,2],item.class_name+item.teacher);
           }else if(element === '星期三第1-2节'){
-            newArray.set([1,3],item.class_name);
+            newArray.set([1,3],item.class_name+item.teacher);
           }else if(element === '星期三第3-4节'){
-            newArray.set([2,3],item.class_name);
+            newArray.set([2,3],item.class_name+item.teacher);
           }else if(element === '星期三第5-6节'){
-            newArray.set([3,3],item.class_name);
+            newArray.set([3,3],item.class_name+item.teacher);
           }else if(element === '星期三第7-8节'){
-            newArray.set([4,3],item.class_name);
+            newArray.set([4,3],item.class_name+item.teacher);
           }else if(element === '星期三第9-10节'){
-            newArray.set([5,3],item.class_name);
+            newArray.set([5,3],item.class_name+item.teacher);
           }else if(element === '星期三第11节'){
-            newArray.set([6,3],item.class_name);
+            newArray.set([6,3],item.class_name+item.teacher);
           }else if(element === '星期四第1-2节'){
-            newArray.set([1,4],item.class_name);
+            newArray.set([1,4],item.class_name+item.teacher);
           }else if(element === '星期四第3-4节'){
-            newArray.set([2,4],item.class_name);
+            newArray.set([2,4],item.class_name+item.teacher);
           }else if(element === '星期四第5-6节'){
-            newArray.set([3,4],item.class_name);
+            newArray.set([3,4],item.class_name+item.teacher);
           }else if(element === '星期四第7-8节'){
-            newArray.set([4,4],item.class_name);
+            newArray.set([4,4],item.class_name+item.teacher);
           }else if(element === '星期四第9-10节'){
-            newArray.set([5,4],item.class_name);
+            newArray.set([5,4],item.class_name+item.teacher);
           }else if(element === '星期四第11节'){
-            newArray.set([6,4],item.class_name);
+            newArray.set([6,4],item.class_name+item.teacher);
           }else if(element === '星期五第1-2节'){
-            newArray.set([1,5],item.class_name);
+            newArray.set([1,5],item.class_name+item.teacher);
           }else if(element === '星期五第3-4节'){
-            newArray.set([2,5],item.class_name);
+            newArray.set([2,5],item.class_name+item.teacher);
           }else if(element === '星期五第5-6节'){
-            newArray.set([3,5],item.class_name);
+            newArray.set([3,5],item.class_name+item.teacher);
           }else if(element === '星期五第7-8节'){
-            newArray.set([4,5],item.class_name);
+            newArray.set([4,5],item.class_name+item.teacher);
           }else if(element === '星期五第9-10节'){
-            newArray.set([5,5],item.class_name);
+            newArray.set([5,5],item.class_name+item.teacher);
           }else if(element === '星期五第11节'){
-            newArray.set([6,5],item.class_name);
+            newArray.set([6,5],item.class_name+item.teacher);
           }
         });
         setArray(newArray); // 更新array数组的状态

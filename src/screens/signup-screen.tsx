@@ -1,5 +1,5 @@
 import AnimatedColorBox from "../components/animated-color-box";
-import {Box, Button, HStack, Input, useColorModeValue, VStack} from "native-base";
+import {Box, Button, Heading, HStack, Input, useColorModeValue, VStack} from "native-base";
 import React, {useCallback, useEffect, useState} from "react";
 import {NativeSyntheticEvent, TextInputChangeEventData} from "react-native";
 import {useNavigation} from "@react-navigation/native";
@@ -18,7 +18,7 @@ const SignupScreen = () => {
             padding: 20,
         },
         contentContainer: {
-            paddingBottom: 800, // 设置底部填充
+            paddingBottom: 900, // 设置底部填充
         },
     });
     const link_route = serverLink;
@@ -66,60 +66,139 @@ const SignupScreen = () => {
         setWarning(warning)
     }, [warning]);
 
+    const [warning1, setWarning1] = useState("");
+
+    useEffect(() => {
+        setWarning1(warning1)
+    }, [warning1]);
+
+    const [send, setSend] = useState(false);
+
     return (
         <ScrollView>
             <View style={styles.contentContainer}>
 
 
-            <VStack w="full" h="110px" marginTop={20} alignItems="center" alignContent="center" p={4}>
-                <Box bg={"orange.300"} marginBottom={2} alignItems={"center"}>{warning}</Box>
+            <VStack w="full" h="110px" marginTop={20} marginLeft={15} alignItems="left" alignContent="left" p={4}>
+                <Heading color="black" p={6} size="lg" marginTop={-5}>
+                    注册账号
+                </Heading>
+                <Box marginBottom={2} alignItems={"center"} >
+                    <Text color={"orange.500"}>{warning}</Text></Box>
 
+                <Box
+                borderBottomWidth={1}
+                borderBottomColor={"black"}>
                 <HStack>
                     <Text fontSize={18}>学号:</Text>
-                    <InputBox input_text={id} place_holder={"id"} onChangeSubject={handleChangeId} width="200"/>
-                </HStack>
+                    <Input fontSize={15} placeholder={"id"} borderColor={"warmGray.50"} width={200} onChange={handleChangeId}></Input>
 
+                    {/*<InputBox input_text={id} place_holder={"id"} onChangeSubject={handleChangeId} width="200"/>*/}
+                </HStack>
+                </Box>
+
+                <Box
+                    borderBottomWidth={1}
+                    borderBottomColor={"black"}>
                 <HStack marginTop={5}>
                     <Text fontSize={18}>真实姓名:</Text>
-                    <InputBox input_text={username} place_holder={"username"} onChangeSubject={handleChangeUsername}
-                              width="200"/>
-                </HStack>
+                    <Input fontSize={15} placeholder={"username"} borderColor={"warmGray.50"} width={160} onChange={handleChangeUsername}></Input>
 
+                    {/*<InputBox input_text={username} place_holder={"username"} onChangeSubject={handleChangeUsername}*/}
+                    {/*          width="200"/>*/}
+                </HStack>
+                </Box>
+
+                <Box
+                    borderBottomWidth={1}
+                    borderBottomColor={"black"}>
                 <HStack marginTop={5}>
                     <Text fontSize={18}>昵称:</Text>
-                    <InputBox input_text={name} place_holder={"name"} onChangeSubject={handleChangeName}
-                              width="200"/>
-                </HStack>
+                    {/*<InputBox input_text={name} place_holder={"name"} onChangeSubject={handleChangeName}*/}
+                    {/*          width="200"/>*/}
+                    <Input fontSize={15} placeholder={"name"} borderColor={"warmGray.50"} width={200} onChange={handleChangeName}></Input>
 
+                </HStack>
+                </Box>
+
+                <Box
+                    borderBottomWidth={1}
+                    borderBottomColor={"black"}>
                 <HStack marginTop={5}>
                     <Text fontSize={18}>密码:</Text>
-                    <InputBox input_text={password} place_holder={"password"} onChangeSubject={handleChangePassword}
-                              width="200"/>
+                    <Input fontSize={15} placeholder={"password"} borderColor={"warmGray.50"} width={200} onChange={handleChangePassword}></Input>
+                    {/*<InputBox input_text={password} place_holder={"password"} onChangeSubject={handleChangePassword}*/}
+                    {/*          width="200"/>*/}
                 </HStack>
+                </Box>
 
+                <Box
+                    borderBottomWidth={1}
+                    borderBottomColor={"black"}>
                 <HStack marginTop={5}>
                     <Text fontSize={18}>性别:</Text>
-                    <InputBox input_text={gender} place_holder={"gender"} onChangeSubject={handleChangeGender}
-                              width="200"/>
+                    {/*<InputBox input_text={gender} place_holder={"gender"} onChangeSubject={handleChangeGender}*/}
+                    {/*          width="200"/>*/}
+                    <Input fontSize={15} placeholder={"gender"} borderColor={"warmGray.50"} width={200} onChange={handleChangeGender}></Input>
                 </HStack>
+                </Box>
 
+                <Box
+                    borderBottomWidth={1}
+                    borderBottomColor={"black"}>
                 <HStack marginTop={5}>
                     <Text fontSize={18}>专业:</Text>
-                    <InputBox input_text={major} place_holder={"major"} onChangeSubject={handleChangeMajor}
-                              width="200"/>
+                    {/*<InputBox input_text={major} place_holder={"major"} onChangeSubject={handleChangeMajor}*/}
+                    {/*          width="200"/>*/}
+                    <Input fontSize={15} placeholder={"major"} borderColor={"warmGray.50"} width={200} onChange={handleChangeMajor}></Input>
                 </HStack>
+                </Box>
 
-                <HStack marginTop={5}>
+                <Box
+                    borderBottomWidth={1}
+                    borderBottomColor={"black"}>
+                <HStack marginTop={5} marginBottom={2}>
                     <Text fontSize={18}>邮箱:</Text>
-                    <InputBox input_text={email} place_holder={"email"} onChangeSubject={handleChangeEmail}
-                              width="200"/>
+                    {/*<InputBox input_text={email} place_holder={"email"} onChangeSubject={handleChangeEmail}*/}
+                    {/*          width="200"/>*/}
+                    <Input fontSize={15} placeholder={"email"} borderColor={"warmGray.50"} width={200} onChange={handleChangeEmail}></Input>
                 </HStack>
+                </Box>
 
-                <HStack marginTop={5}>
-                    <Text fontSize={18}>邮箱密码:</Text>
-                    <InputBox input_text={email_password} place_holder={"email_password"}
-                              onChangeSubject={handleChangeEmailPassword} width="200"/>
+                <Box
+                    borderBottomWidth={1}
+                    borderBottomColor={"black"}>
+                <Box alignItems={"center"} >
+                    <Text color={send?"green.600":"orange.600"}>{warning1}</Text></Box>
+                <HStack >
+                    <Text fontSize={18}>邮箱验证码:</Text>
+                    {/*<InputBox input_text={email_password} place_holder={"验证码"}*/}
+                    {/*          onChangeSubject={handleChangeEmailPassword} width="150"/>*/}
+                    <Input fontSize={15} placeholder={"验证码"} borderColor={"warmGray.50"} width={100} onChange={handleChangeEmailPassword}></Input>
+                    <Button marginLeft={3}
+                            color={"green.700"}
+                            width={70}
+                            onPress={() => {
+                                setWarning1("waiting...")
+                                const formData1 = new FormData();
+                                formData1.append('email_address', email);
+                                axios.post(link_route + '/register_by_email', formData1, {
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data'
+                                    }
+                                }).then(response => {
+                                    if(response.data['state'] === 'succeed'){
+                                        setSend(true);
+                                    }
+                                    setWarning1(response.data['state'])
+                                }).catch(error => {
+                                    console.error('Login failed:', error);
+                                })
+                            }}
+                    >获取
+                    </Button>
                 </HStack>
+                </Box>
                 <HStack>
                     <Button width={100} marginTop={5} onPress={() => {
                         formData.append("id", id)

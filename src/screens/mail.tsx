@@ -16,8 +16,6 @@ import { useState,useEffect } from "react";
 import { FlatList, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, TextInput, Dimensions } from "react-native";
 import axios from 'axios';
 import {getRequest,postRequest} from '../axios';
-
-
 const BASE_URL = serverLink;
 
 // function deepClone(data) {
@@ -72,6 +70,8 @@ const EmailScreen = () => {
   };
 
   const handleRegister = async () => {
+    setRegisterInfo('没有注册信息！')
+    setShowModal(false);
     try {
       const response = await axios({
         method: 'get',//请求方法
@@ -87,7 +87,7 @@ const EmailScreen = () => {
       // console.log(courses);
       console.log(response.data);
       setRegisterInfo(response.data);
-      setShowModal(false);
+
     } catch (error) {
       console.error(error);
     }
@@ -102,7 +102,6 @@ const EmailScreen = () => {
 
   const handleRequest = async () => {
     try {
-
       const response = await axios({
         method: 'get',//请求方法
         params: {
@@ -149,6 +148,8 @@ const EmailScreen = () => {
       <Button onPress={handleRequest}>查询</Button>
       <View style={{height: 40}}></View>
       <Button onPress={handleRegisterModal}>注册</Button>
+      <View style={{height: 40}}></View>
+      <Button onPress={handleRegisterModal}>信息更新</Button>
       <View style={{height: 180}}></View>
       <Modal isOpen={showModal} onClose={closeModal}>
         <Box

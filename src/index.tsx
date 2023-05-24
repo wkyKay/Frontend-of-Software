@@ -13,7 +13,7 @@ import LoginWithEmailScreen from "./screens/login-email-screen";
 import SettingScreen from "./screens/setting-screen";
 import MultiSchemes from './screens/multi-schemes'
 // import MultiSchemesDetails from './screens/multi-schemes-details'
-// import ChatScreen from './screens/chat-screen'
+import ChatScreen from './screens/chat-screen'
 
 const App = () => {
   return (
@@ -38,7 +38,7 @@ const App = () => {
         <Drawer.Screen name='Setting' component={SettingScreen}/>
         <Drawer.Screen name='MultiSchemes' component={MultiSchemes}/>
         {/*<Drawer.Screen name='MultiSchemesDetails' component={MultiSchemesDetails}/>*/}
-        {/*<Drawer.Screen name='ChatScreen' component={ChatScreen}/>*/}
+        <Drawer.Screen name='ChatScreen' component={ChatScreen}/>
 
       </Drawer.Navigator>
   )

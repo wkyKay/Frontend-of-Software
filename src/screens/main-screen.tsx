@@ -12,12 +12,12 @@ import { useNavigation } from '@react-navigation/native';
 const initialData = [
   {
     id: shortid.generate(),
-    subject: 'Buy movie tickets for Friday',
+    subject: '复习期末考试',
     done: false
   },
   {
     id: shortid.generate(),
-    subject: 'Make a React Native tutorial',
+    subject: '打游戏',
     done: false
   }
 ]
@@ -94,7 +94,7 @@ export default function MainScreen() {
           editingItemId={editingItemId}
         />
       </VStack>
-      
+
       <Fab
       //右下角加号
         position="absolute"

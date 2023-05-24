@@ -62,12 +62,12 @@ const CommentSection = () => {
     },[])
 
     const renderCourseItem = ({ item }: { item: CourseItem }) => (
-        <HStack>
-          <Box width="60px" marginLeft={1} marginTop={1} bgColor={'#CFD9E7'}> {item.name}</Box>
+        <HStack >
+          <Box width="60px" marginLeft={1} marginTop={1} bgColor={'#7491B9'} borderTopLeftRadius={5} borderBottomLeftRadius={5}> {item.name}</Box>
           <Box width = "55px" marginLeft={1} marginTop={1} bgColor={'#B1C1D8'}> {item.course_id}</Box>
           <Box width = "52px" marginLeft={1} marginTop={1} bgColor={'#92A9C9'}> {item.teacher}</Box>
           <Box width = "70px" marginLeft={1} marginTop={1} bgColor={'#7491B9'}> {item.time}</Box>
-          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={ '#5578AA'}> {item.college}</Box>
+          <Box width = "55px" marginLeft={1} marginTop={1} bgColor={ '#5578AA'} borderTopRightRadius={5} borderBottomRightRadius={5}> {item.college}</Box>
           <IconButton
                 onPress={() => {
                     nav.navigate("CommentPage", {item: item}as CourseItem);
@@ -151,6 +151,13 @@ const CommentSection = () => {
                 borderTopRightRadius="20px"
                 pt="20px"
             >
+                <HStack>
+                    <Box alignItems={"center"} width="61px" marginLeft={1} marginTop={1} bgColor={'blue.400'} borderTopLeftRadius={5} borderBottomLeftRadius={5}>课程</Box>
+                    <Box alignItems={"center"} width = "59px"  marginTop={1} bgColor={'blue.300'}>编号</Box>
+                    <Box alignItems={"center"} width = "58px"  marginTop={1} bgColor={'blue.400'}>教师</Box>
+                    <Box alignItems={"center"} width = "74px"  marginTop={1} bgColor={'blue.300'}>时间</Box>
+                    <Box alignItems={"center"} width = "56px"  marginTop={1} bgColor={ 'blue.400'} borderTopRightRadius={5} borderBottomRightRadius={5}>院系</Box>
+                </HStack>
 
                 <MyCourseList data={course_data} renderItem={renderCourseItem}></MyCourseList>
 

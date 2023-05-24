@@ -15,6 +15,7 @@ import {
     setSharedName,
     setSharedUsername
 } from "../components/DataContext";
+import {Text} from "native-base";
 
 const LoginWithEmailScreen = () => {
     const link_route = serverLink;
@@ -36,8 +37,7 @@ const LoginWithEmailScreen = () => {
     const formData = new FormData();
     const nav = useNavigation();
     const [warning, setWarning] = useState("");
-
-
+    const [send, setSend] = useState(false)
     const styles = StyleSheet.create({
         container: {
             flex: 1,
@@ -78,7 +78,9 @@ const LoginWithEmailScreen = () => {
                     </VStack>
                     <HStack>
                         <VStack w="full" h="110px" alignItems="center" alignContent="center" p={4}>
-                            <Box bg={"orange.300"} marginBottom={2} alignItems={"center"}>{warning}</Box>
+                            <Box marginBottom={2} alignItems={"center"}>
+                                <Text color={send?"green.600":"orange.600"} fontSize={15}>{warning}</Text>
+                                </Box>
                             <InputBox
                                 input_text={email}
                                 place_holder="邮箱地址"
@@ -110,6 +112,8 @@ const LoginWithEmailScreen = () => {
                                             width={70}
                                             bgColor={"green.500"}
                                             onPress={() => {
+                                                setWarning("waiting...")
+
                                                 const formData1 = new FormData();
                                                 formData1.append('email_address', email);
                                                 axios.post(link_route + '/login_by_email', formData1, {
@@ -117,6 +121,11 @@ const LoginWithEmailScreen = () => {
                                                         'Content-Type': 'multipart/form-data'
                                                     }
                                                 }).then(response => {
+                                                    if(response.data['state']==='send succeed'){
+                                                        setSend(true)
+                                                    }else{
+                                                        setSend(false)
+                                                    }
                                                     setWarning(response.data['state'])
                                                 }).catch(error => {
                                                     console.error('Login failed:', error);

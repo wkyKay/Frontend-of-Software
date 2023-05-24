@@ -17,8 +17,9 @@ import {
     setSharedUsername,
     getShareId, setSharedPassword, setSharedEmailPassword
 } from "../components/DataContext";
-
+import {Text} from "native-base";
 const LoginScreen = () => {
+
     const link_route = serverLink;
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -39,7 +40,7 @@ const LoginScreen = () => {
     const nav = useNavigation();
     const [warning, setWarning] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-
+    const [success, setSuccess] = useState(false)
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -85,7 +86,9 @@ const LoginScreen = () => {
                     </VStack>
                     <HStack>
                         <VStack w="full" h="110px" alignItems="center" alignContent="center" p={4}>
-                            <Box bg={"orange.300"} marginBottom={2} alignItems={"center"}>{warning}</Box>
+                            <Box marginBottom={2} alignItems={"center"}>
+                                <Text fontSize={15} color={success?"green.600":"orange.500"}>{warning}</Text>
+                            </Box>
                             <InputBox
                                 input_text={name}
                                 place_holder="id"
@@ -136,6 +139,7 @@ const LoginScreen = () => {
                                             }).then(response => {
                                                 setWarning(response.data['state'])
                                                 if (response.data['state'] === 'succeed') {
+                                                    setSuccess(true)
                                                     setSharedUsername(response.data["username"]);
                                                     setSharedName(response.data['name']);
                                                     setSharedGender(response.data['gender']);
@@ -145,6 +149,8 @@ const LoginScreen = () => {
                                                     setSharedId(response.data['id'].toString())
                                                     setSharedEmailPassword(response.data['email_password'])
                                                     nav.navigate("Main")
+                                                }else {
+                                                    setSuccess(false)
                                                 }
                                             }).catch(error => {
                                                 console.error('Login failed:', error);

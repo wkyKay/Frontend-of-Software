@@ -12,7 +12,6 @@ import { useState,useEffect } from "react";
 import { FlatList, SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import axios from 'axios';
 import {useNavigation} from "@react-navigation/native";
-import {serverLink} from "../utils/ServerLink";
 
 
 const styles = StyleSheet.create({
@@ -40,6 +39,7 @@ const Item = ({ item, onPress, style }) => (
 import AnimatedColorBox from '../components/animated-color-box'
 import Navbar from '../components/navbar'
 import Masthead from '../components/masthead'
+import {serverLink} from "../utils/ServerLink";
 
 const BASE_URL = serverLink;
 

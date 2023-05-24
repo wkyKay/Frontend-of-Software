@@ -25,6 +25,7 @@ import {
     setSharedGender
 } from "../components/DataContext";
 import NavBar from "../components/navbar";
+import {Line} from "react-native-svg";
 
 const SettingScreen = () => {
     const styles = StyleSheet.create({
@@ -145,38 +146,13 @@ const SettingScreen = () => {
                                       width="200"/>
                         </HStack>
 
-                        <HStack marginTop={5}>
-                            <Text fontSize={18}>邮箱密码:</Text>
-                            {/*<InputBox input_text={email_password} place_holder={"email_password"}*/}
-                            {/*          onChangeSubject={handleChangeEmailPassword} width="200"/>*/}
-                            <Box marginLeft={2}
-                                 bg={"white"}
-                                 height="40px"
-                                 borderTopLeftRadius="20px"
-                                 borderTopRightRadius="20px"
-                                 borderBottomLeftRadius="20px"
-                                 borderBottomRightRadius="20px">
-                                <Input
-                                    type="password"
-                                    width="200"
-                                    borderTopLeftRadius="20px"
-                                    borderTopRightRadius="20px"
-                                    borderBottomLeftRadius="20px"
-                                    borderBottomRightRadius="20px"
-                                    height="40px"
-                                    fontSize={17}
-                                    placeholder={"email_password"}
-                                    onChange={handleChangeEmailPassword}
-                                    value={email_password}
-                                >
-                                </Input>
-                            </Box>
-                        </HStack>
                         <VStack>
-                            <Box bgColor={"green.300"}
-                                 alignItems={"center"} marginBottom={2} marginTop={2} width={180}
+                            <Box
+                                borderBottomWidth={1}
+                                borderBottomColor={"green.600"}
+                                 alignItems={"center"} marginBottom={2} marginTop={5}
                                  alignContent="center">
-                                Confirm with Password:
+                                <Text color={"green.600"} fontSize={15}>Confirm with Password:</Text>
                             </Box>
                             <HStack>
                                 <Text fontSize={18}>密码:</Text>
